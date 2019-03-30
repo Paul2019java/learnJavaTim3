@@ -1,4 +1,4 @@
-package fundamentalsCoding.bytecodeExample;
+package fundamentalsCoding.mapFilterCollect;
 
 import static java.lang.String.join;
 

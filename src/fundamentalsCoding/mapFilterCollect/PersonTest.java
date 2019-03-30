@@ -1,9 +1,9 @@
-package fundamentalsCoding.bytecodeExample;
+package fundamentalsCoding.mapFilterCollect;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static fundamentalsCoding.bytecodeExample.Employer.*;
+import static fundamentalsCoding.mapFilterCollect.Employer.*;
 
 public class PersonTest {
     static List<Person> employees;

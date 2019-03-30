@@ -1,6 +1,6 @@
 package fundamentalsCoding;
 
-import fundamentalsCoding.bytecodeExample.Person;
+import fundamentalsCoding.mapFilterCollect.Person;
 
 public class DefaultValues {
 
