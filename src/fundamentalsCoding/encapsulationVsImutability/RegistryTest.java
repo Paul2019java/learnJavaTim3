@@ -3,6 +3,7 @@ package fundamentalsCoding.encapsulationVsImutability;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class RegistryTest {
@@ -22,12 +23,13 @@ public class RegistryTest {
         Registry registry = new Registry(names);
 
         Name newName = new Name("ABC", "XYZ!!!!!!!!!");
-        names.remove(0);
+        for(int i=0; names.size() > 0; i++) {
+            names.remove(0);
+        }
         names.add(0, newName);
 
         registry.print();
     }
-
 
     @Test
     public void testWithUnmodifiableList(){
@@ -38,11 +40,15 @@ public class RegistryTest {
                 new Name("Barak", "Obama"));
 
         // encapsulated object; can you change it???
-        Registry registry = new Registry(names);
+        Registry registry = new Registry(names); // reference is @123fac -> list of 3 names
 
         Name newName = new Name("ABC", "XYZ!!!!!!!!!");
-        names.remove(0);
-        names.add(0, newName);
+        // GOOD! will throw UnsupportedOperationException
+        /*names.remove(0);
+        names.add(0, newName);*/
+
+        names = new ArrayList<>();  // name <--- new object (new reference @000abc)
+        names.add(new Name("Marius", "Petrescu"));
 
         registry.print();
     }

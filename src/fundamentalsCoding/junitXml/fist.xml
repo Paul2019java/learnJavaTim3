@@ -1,0 +1,25 @@
+
+<book author="Mark Twain" year="2000">
+
+    <name>
+        Tom Sayer Adventures
+    </name>
+
+    <chapters>
+        <info message="all Tom Sayer chapters" />
+
+        <chapter nr="1">
+            First chapter
+        </chapter>
+
+        <chapter>
+            Second chapter
+        </chapter>
+
+        <chapter>
+            Third chapter
+        </chapter>
+
+    </chapters>
+
+</book>
