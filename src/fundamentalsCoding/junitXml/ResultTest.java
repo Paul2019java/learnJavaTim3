@@ -90,7 +90,7 @@ public class ResultTest {
                 "2",
                 processesResults);
 
-
+        System.out.println(result);
 
     }
 

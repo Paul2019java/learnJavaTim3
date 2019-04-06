@@ -38,5 +38,13 @@ public class Result {
         return processesResults;
     }
 
-
+    @Override
+    public String toString() {
+        return "Result{" +
+                "\n resultInfo=" + resultInfo +
+                ", \n processCount='" + processCount + '\'' +
+                ", \n failedProcessesCount='" + failedProcessesCount + '\'' +
+                ", \n processesResults=" + processesResults +
+                "\n}";
+    }
 }

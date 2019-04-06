@@ -39,11 +39,11 @@ public class ProcessResult {
 
     @Override
     public String toString() {
-        return "ProcessResult{" +
-                "processResultInfo=" + processResultInfo +
-                ", eventCount='" + eventCount + '\'' +
-                ", failedEventsCount='" + failedEventsCount + '\'' +
-                ", eventsResults=" + eventsResults +
+        return "\n\n  ProcessResult{" +
+                "\n   processResultInfo=" + processResultInfo +
+                ", \n   eventCount='" + eventCount + '\'' +
+                ", \n   failedEventsCount='" + failedEventsCount + '\'' +
+                ", \n   eventsResults=" + eventsResults +
                 '}';
     }
 }

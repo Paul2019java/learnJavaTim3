@@ -23,9 +23,9 @@ public class EventResult {
 
     @Override
     public String toString() {
-        return "EventResult{" +
-                "eventResultInfo=" + eventResultInfo +
-                ", failures=" + failures +
+        return "\n\n    EventResult{" +
+                "\n    eventResultInfo=" + eventResultInfo +
+                ", \n    failures=" + failures +
                 '}';
     }
 }

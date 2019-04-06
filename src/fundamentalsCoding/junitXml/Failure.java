@@ -26,10 +26,10 @@ public class Failure {
 
     @Override
     public String toString() {
-        return "Failure{" +
-                "message='" + message + '\'' +
-                ", severity=" + severity +
-                ", failureInfo='" + failureInfo + '\'' +
+        return "\n\n     Failure{" +
+                "\n      message='" + message + '\'' +
+                ",\n      severity=" + severity +
+                ",\n      failureInfo='" + failureInfo + '\'' +
                 '}';
     }
 }
