@@ -1,14 +1,14 @@
 #### Create objects to map the following data structure.
 
-testSuiteResult
+Result
 
-- name, id, elapsedTime, testsCount, failedTestsCount
+- name, id, elapsedTime, processCount, failedprocessesCount
 
-- testsResults
+- processResults
 
-    - name, id, elapsedTime, testCaseCount, failedTestCaseCount
+    - name, id, elapsedTime, eventCount, failedeventCount
 
-    - testcasesResults
+    - eventsResults
 
         - name, id, elapsedTime
 
@@ -20,8 +20,8 @@ testSuiteResult
 
             - text
 
-Test id: test index
+Process id: process index
 
-Testcase id: test index/testcase index
+Event id: process index/event index
 
 #### Create a testSuiteResult with 4 tests, each having at least one testcase, and at least one ERROR.
