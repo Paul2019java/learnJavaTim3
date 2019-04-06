@@ -1,6 +1,8 @@
 package fundamentalsCoding.employees;
 
 
+import org.junit.jupiter.api.Test;
+
 public class Employee {
 
     private String name;
@@ -32,5 +34,17 @@ public class Employee {
                 ", city='" + city + '\'' +
                 ", employer=" + employer +
                 '}';
+    }
+
+
+    public static void main(String[] args){
+
+        Employee employee = new Employee(
+                "Oana",
+                "Timisoara",
+                Employer.IBM);
+
+        System.out.println(employee);  // implicit call of employee.toString
+        System.out.println(employee.toString()); // explicit call of toString
     }
 }
