@@ -1,5 +1,6 @@
 package fundamentalsCoding.base;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import test_19_03_30.Car;
 
@@ -15,6 +16,7 @@ public class MapTest {
             400, "tester"
     );
 
+
     Map<CarBrand, List<String>> carsByBrand = new TreeMap<>();
 
     @Test
@@ -26,6 +28,36 @@ public class MapTest {
     public void printMapKeys(){
         Set<Integer> keys = userById.keySet();
         System.out.println("Keys :" + keys);
+
+        TreeSet<Integer> orderedIds = new TreeSet();
+        orderedIds.addAll(userById.keySet());
+        System.out.println("Ordered keys: " + orderedIds);
+
+        // remove duplicates from list and order names
+        final List<String> names = List.of(
+                "Tania", "Dan", "Maria", "Carmen",
+                "Titus", "Marcel", "Tania", "Dan",
+                "Maria", "Carmen", "Tania", "Dan",
+                "Maria", "Carmen"
+        );
+        // names.add("Dan"); // throws java.lang.UnsupportedOperationException
+        System.out.println("Names: " + names);
+
+        List<String> newNames = new ArrayList<>();
+        newNames.addAll(names);
+        newNames.add("Dan");
+        System.out.println("newNames: "+ newNames);
+
+        // names = newNames; // compiler error due to 'final' keyword
+
+        Set<String> uniqNamesUnordered = new HashSet<>();
+        uniqNamesUnordered.addAll(names);
+
+        Set<String> uniqNames = new TreeSet<>();
+        uniqNames.addAll(names);
+
+        System.out.println("Unique unordered names (HashSet): " + uniqNamesUnordered);
+        System.out.println("Unique and ordered names (TreeSet): " + uniqNames);
     }
 
     @Test
@@ -34,26 +66,32 @@ public class MapTest {
         System.out.println("Values :" + values);
     }
 
-
     @Test
     public void addElementsInCarByBrand(){
        // map.put(key, value)
         List<String> porscheModels = List.of("911", "718", "Panamera", "Carrera");
         carsByBrand.put(
                 CarBrand.PORSCHE, // key
-                porscheModels // value
+                porscheModels     // value
         );
 
-        List<String> audiModels = List.of("A4", "S8", "R8", "B3");
+        List<String> audiModels = List.of("A4", "S8", "R8", "B3", "S8", "S8");
         carsByBrand.put(
                 CarBrand.AUDI, // key
-                audiModels // value
+                audiModels     // value
         );
 
         List<String> fordModels = List.of("Fiesta", "Mondeo", "Focus", "Galaxy");
+        List<String> fordModels2 = List.of("Fiesta", "Mondeo");
         carsByBrand.put(
                 CarBrand.FORD, // key
-                fordModels // value
+                fordModels     // value
+        );
+
+        // overwrite CarBrand.FORD key
+        carsByBrand.put(
+                CarBrand.FORD, // key
+                fordModels2    // value
         );
 
 
@@ -83,4 +121,11 @@ public class MapTest {
 
     }
 
+    @Test
+    @Disabled
+    // thows a runtime exception - java.lang.UnsupportedOperationException
+    public void testChangeUnmodifiableMap(){
+        userById.put(100, "superuser");
+        System.out.println(userById);
+    }
 }
