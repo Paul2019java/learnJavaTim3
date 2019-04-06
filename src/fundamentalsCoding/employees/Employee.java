@@ -27,14 +27,14 @@ public class Employee {
         return employer;
     }
 
-    @Override
+/*    @Override
     public String toString() {
         return "Employee{" +
                 "name='" + name + '\'' +
                 ", city='" + city + '\'' +
                 ", employer=" + employer +
                 '}';
-    }
+    }*/
 
 
     public static void main(String[] args){
