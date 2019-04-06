@@ -24,4 +24,4 @@ Process id: process index
 
 Event id: process index/event index
 
-#### Create a testSuiteResult with 4 tests, each having at least one testcase, and at least one ERROR.
+#### Create a Result for 4 processes, each having at least one event, and at least one failure.
