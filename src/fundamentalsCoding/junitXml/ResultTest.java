@@ -1,9 +1,11 @@
 package fundamentalsCoding.junitXml;
 
 import java.util.List;
+import java.util.Map;
 
 import static fundamentalsCoding.junitXml.Severity.ERROR;
 import static fundamentalsCoding.junitXml.Severity.WARNING;
+import static fundamentalsCoding.junitXml.XmlUtils.xmlStartTag;
 import static java.util.Collections.emptyList;
 
 public class ResultTest {
@@ -21,9 +23,31 @@ public class ResultTest {
         // write xmlString to file in Resources/out/junitXmlReport.xml
     }
 
-    //TODO
+
     private static String generateJunitXml(Result result) {
-        return "TODO junitXml report";
+        String junitXmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>";
+        // <testsuites id="20140612_170519"
+        // name="New_configuration (14/06/12 17:05:19)"
+        // tests="225"
+        // failures="1262"
+        // time="0.001">
+
+        // Result -> testsuites
+        // ProcessResult -> testsuite
+        // EventResult -> testcase
+        // Failure -> Failure
+        Map<String, String> testSuitesAttributes = Map.of(
+                "id", result.getResultInfo().getId(),
+                "name", result.getResultInfo().getName(),
+                "time", result.getResultInfo().getElapsedTime(),
+                "tests", result.getProcessCount(),
+                "failures", result.getFailedProcessesCount()
+        );
+
+        junitXmlString += xmlStartTag("testsuites", testSuitesAttributes);
+
+
+        return junitXmlString;
     }
 
     private static Result generateMockResult() {

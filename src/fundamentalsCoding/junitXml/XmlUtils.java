@@ -17,7 +17,7 @@ public class XmlUtils {
             String tagName,
             Map<String, String> attributes) {
 
-        String xmlTagString = "<" + tagName;
+        String xmlTagString = "\n<" + tagName;
 
         String attributesString = getAttributesString(attributes);
 
@@ -46,7 +46,7 @@ public class XmlUtils {
             String tagName,
             Map<String, String> attributes) {
 
-        String xmlTagString = "<" + tagName;
+        String xmlTagString = "\n<" + tagName;
 
         String attributesString = getAttributesString(attributes);
 
@@ -62,14 +62,14 @@ public class XmlUtils {
     // </book>
     public static String xmlEndTag(
             String tagName){
-        return "</" + tagName + ">";
+        return "\n</" + tagName + ">";
     }
 
     @Test
     public void test_xmlTag() {
 
         // expected output
-        String expectedXmlTag = "<book author=\"Mark Twain\" name=\"Tom Sayer\" />";
+        String expectedXmlTag = "\n<book author=\"Mark Twain\" name=\"Tom Sayer\" />";
 
         // Input data
         String tagName = "book";
@@ -91,7 +91,7 @@ public class XmlUtils {
     public void test_xmlStartTag() {
 
         // expected output
-        String expectedXmlTag = "<book author=\"Mark Twain\" name=\"Tom Sayer\">";
+        String expectedXmlTag = "\n<book author=\"Mark Twain\" name=\"Tom Sayer\">";
 
         // Input data
         String tagName = "book";
@@ -128,7 +128,7 @@ public class XmlUtils {
 
     @Test
     public void test_getEndTag(){
-        String expectedXmlEndTag = "</book>";
+        String expectedXmlEndTag = "\n</book>";
 
         String actualEndTagString = xmlEndTag("book");
 
