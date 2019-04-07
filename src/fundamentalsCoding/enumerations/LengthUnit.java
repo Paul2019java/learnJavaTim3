@@ -2,26 +2,29 @@ package fundamentalsCoding.enumerations;
 
 public enum LengthUnit {
 
-    METER,
+    METER(1),
 
-    INCH,
+    INCH(0.025f),
 
-    CENTIMETER,
+    CENTIMETER(0.01f),
 
-    FOOT,
+    FOOT(0.3f),
 
-    KM;
+    MM(0.001f),
 
-/*    - inch, conversionFactor=0.025
-    - centimeter, conversionFactor=0.1
-    - foot,  conversionFactor=0.3
-    - km, conversionFactor=1000*/
-    public float toMeter(float length) {
+    KM(1000);
 
-        return length * getConversionFactor();
+    private float conversionFactor;
+
+    LengthUnit(float conversionFactor) {
+        this.conversionFactor = conversionFactor;
     }
 
-    private float getConversionFactor() {
+    public float toMeter(float length) {
+        return length * conversionFactor;
+    }
+
+    /*    private float getConversionFactor() {
 
         switch (this){
             case KM: return 1000;
@@ -33,5 +36,5 @@ public enum LengthUnit {
             default: throw new Error("unknown length unit: "
                     + this.toString());
         }
-    }
+    }*/
 }
