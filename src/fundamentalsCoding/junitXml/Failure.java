@@ -4,6 +4,7 @@ public class Failure {
 
     private String message;
     private Severity severity;
+
     private String failureInfo;
 
     public Failure(String message, Severity severity, String failureInfo) {

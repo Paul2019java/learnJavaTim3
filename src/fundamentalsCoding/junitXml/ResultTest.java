@@ -1,10 +1,17 @@
 package fundamentalsCoding.junitXml;
 
+import utils.FileUtils;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
+import static fundamentalsCoding.junitXml.JunitXmlTag.*;
 import static fundamentalsCoding.junitXml.Severity.ERROR;
 import static fundamentalsCoding.junitXml.Severity.WARNING;
+import static fundamentalsCoding.junitXml.XmlUtils.xmlEndTag;
 import static fundamentalsCoding.junitXml.XmlUtils.xmlStartTag;
 import static java.util.Collections.emptyList;
 
@@ -12,17 +19,21 @@ public class ResultTest {
 
     // Create a Result for 4 processes,
     // each having at least one event, and at least one failure.
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Result result = generateMockResult();
 
         String xmlString = generateJunitXml(result);
 
-        System.out.println(xmlString);
+        // System.out.println(xmlString);
 
-        //TODO
         // write xmlString to file in Resources/out/junitXmlReport.xml
+        Path junitXmlReportPath = FileUtils.getLocalPath(
+                "Resources",
+                "out",
+                "junitXmlReport.xml"
+        );
+        Files.write(junitXmlReportPath, xmlString.getBytes());
     }
-
 
     private static String generateJunitXml(Result result) {
         String junitXmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>";
@@ -44,10 +55,88 @@ public class ResultTest {
                 "failures", result.getFailedProcessesCount()
         );
 
-        junitXmlString += xmlStartTag("testsuites", testSuitesAttributes);
+        junitXmlString += xmlStartTag(
+                TEST_SUITES.toString(),
+                testSuitesAttributes);
 
+        junitXmlString += getTestSuiteTags(result.getProcessesResults());
+
+        junitXmlString += xmlEndTag(TEST_SUITES.toString());
 
         return junitXmlString;
+    }
+
+    private static String getTestSuiteTags(List<ProcessResult> processesResults) {
+        String testSuiteTagsString = "";
+        for(ProcessResult processResult : processesResults){
+            testSuiteTagsString += xmlStartTag(
+                    TEST_SUITE.toString(),
+                    // id="codereview.cobol.analysisProvider"
+                    // name="COBOL Code Review"
+                    // time="0.001"
+                    // tests="45"
+                    // failures="17"
+                    // testcases tags
+                    Map.of(
+                            "id", processResult.getProcessResultInfo().getId(),
+                            "name", processResult.getProcessResultInfo().getName(),
+                            "time", processResult.getProcessResultInfo().getElapsedTime(),
+                            "tests", processResult.getEventCount(),
+                            "failures", processResult.getFailedEventsCount()
+                    ));
+
+                    // add events
+                    testSuiteTagsString += getTestCasesTags(processResult.getEventsResults());
+
+                    testSuiteTagsString += xmlEndTag(TEST_SUITE.toString());
+        }
+
+        return testSuiteTagsString;
+    }
+
+    private static String getTestCasesTags(List<EventResult> eventsResults) {
+
+        String testCasesString = "";
+
+        for(EventResult eventResult : eventsResults) {
+            testCasesString += xmlStartTag(
+                    TEST_CASE.toString(),
+                    // id="codereview.cobol.rules.ProgramIdRule"
+                    // name="Use a program name that matches the source file name"
+                    // time="0.001">
+                    Map.of(
+                            "id", eventResult.getEventResultInfo().getId(),
+                            "name", eventResult.getEventResultInfo().getName(),
+                            "time", eventResult.getEventResultInfo().getElapsedTime())
+            );
+
+            testCasesString += getFailuresString(eventResult.getFailures());
+
+            testCasesString += xmlEndTag(TEST_CASE.toString());
+        }
+
+        return testCasesString;
+    }
+
+    private static String getFailuresString(List<Failure> failures) {
+        String failuresString = "";
+
+        for(Failure failure : failures){
+            failuresString += xmlStartTag(
+                    FAILURE.toString(),
+                    // message="PROGRAM.cbl:2 Use a program name that matches the source file name"
+                    // type="WARNING">
+                    // TextNode: WARNING: Use a program name that matches the source file name
+                    Map.of(
+                            "message", failure.getMessage(),
+                            "type", failure.getSeverity().toString()
+                    ));
+            failuresString += "\n" + failure.getFailureInfo();
+
+            failuresString += xmlEndTag(FAILURE.toString());
+        }
+
+        return failuresString;
     }
 
     private static Result generateMockResult() {
