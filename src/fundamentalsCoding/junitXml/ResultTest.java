@@ -1,6 +1,5 @@
 package fundamentalsCoding.junitXml;
 
-import java.util.Collections;
 import java.util.List;
 
 import static fundamentalsCoding.junitXml.Severity.ERROR;
@@ -13,7 +12,18 @@ public class ResultTest {
     // each having at least one event, and at least one failure.
     public static void main(String[] args) {
         Result result = generateMockResult();
-        System.out.println(result);
+
+        String xmlString = generateJunitXml(result);
+
+        System.out.println(xmlString);
+
+        //TODO
+        // write xmlString to file in Resources/out/junitXmlReport.xml
+    }
+
+    //TODO
+    private static String generateJunitXml(Result result) {
+        return "TODO junitXml report";
     }
 
     private static Result generateMockResult() {
