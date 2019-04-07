@@ -14,16 +14,13 @@ public interface LengthUnitTest {
         float cmLength = 270;
 
         convertAndPrint(kmLength, KM);
-
         convertAndPrint(inchLength, INCH);
-
         convertAndPrint(footLength, FOOT);
-
         convertAndPrint(cmLength, CENTIMETER);
     }
 
     static void convertAndPrint(float length, LengthUnit lengthUnit) {
-        float kmLengthInMeters = toMeter(length, lengthUnit);
+        float kmLengthInMeters = lengthUnit.toMeter(length);
         System.out.println(length + " " + lengthUnit + " = " + kmLengthInMeters + " M");
     }
 }
